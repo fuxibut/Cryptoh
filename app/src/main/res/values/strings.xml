@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cryptoh</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_text">Text</string>
+    <string name="button_encrypt">Encrypt</string>
+    <string name="button_decrypt">Decrypt</string>
+</resources>

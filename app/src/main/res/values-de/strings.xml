@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cryptoh</string>
+    <string name="hint_password">Passwort</string>
+    <string name="hint_text">Text</string>
+    <string name="button_encrypt">Verschlüsseln</string>
+    <string name="button_decrypt">Entschlüsseln</string>
+</resources>
