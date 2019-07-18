@@ -5,4 +5,7 @@
     <string name="hint_text">Text</string>
     <string name="button_encrypt">Verschlüsseln</string>
     <string name="button_decrypt">Entschlüsseln</string>
+    <string name="error_password">Kein Passwort angegeben oder Passwort zu kurz.</string>
+    <string name="error_text">Kein Text angegeben oder in Zwischenablage.</string>
+    <string name="message_send">Verschlüsselten Text versenden</string>
 </resources>

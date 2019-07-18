@@ -9,11 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-// TODO: Insert error messages into resources
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         String encryptedText = "";
 
         if (password == null || password.isEmpty() || password.length() < 8) {
-            showToast("Kein Passwort angegeben oder Passwort zu kurz.");
+            showToast(getString(R.string.error_password));
             passwordEditText.requestFocus();
         } else {
             if (plainText == null || plainText.isEmpty()) {
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     plainText = (String) clipData.getItemAt(0).getText();
                     encryptedText = Blowfish.encrypt(plainText, password);
                 } else {
-                    showToast("Kein Text angegeben oder in Zwischenablage.");
+                    showToast(getString(R.string.error_text));
                     plainEditText.requestFocus();
                 }
             } else {
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
             sendIntent.setType("text/plain");
-            startActivity(Intent.createChooser(sendIntent, "Verschlüsselten Text versenden"));
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.message_send)));
         }
 
     }
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         String decryptedText = "";
 
         if (password == null || password.isEmpty() || password.length() < 8) {
-            showToast("Kein Passwort angegeben oder Passwort zu kurz.");
+            showToast(getString(R.string.error_password));
             passwordEditText.requestFocus();
         } else {
             if (plainText == null || plainText.isEmpty()) {
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     plainText = (String) clipData.getItemAt(0).getText();
                     decryptedText = Blowfish.decrypt(plainText, password);
                 } else {
-                    showToast("Kein Text angegeben oder in Zwischenablage.");
+                    showToast(getString(R.string.error_text));
                     plainEditText.requestFocus();
                 }
             } else {

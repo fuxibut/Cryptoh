@@ -1,14 +1,11 @@
 package com.secusec.cryptoh;
 
-import android.os.Build;
-import androidx.annotation.RequiresApi;
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Blowfish {
-
-    // TODO: Insert error messages into resources
+    
     public static String decrypt(String strEncrypted, String strKey) throws Exception {
         if (strEncrypted == null || strEncrypted.isEmpty())
             throw new IllegalArgumentException("Cleartext null or empty.");

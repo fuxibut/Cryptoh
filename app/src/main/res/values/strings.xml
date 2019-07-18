@@ -4,4 +4,7 @@
     <string name="hint_text">Text</string>
     <string name="button_encrypt">Encrypt</string>
     <string name="button_decrypt">Decrypt</string>
+    <string name="error_password">No password or password is too short.</string>
+    <string name="error_text">No text entered or in clipboard.</string>
+    <string name="message_send">Send encrypted text</string>
 </resources>
