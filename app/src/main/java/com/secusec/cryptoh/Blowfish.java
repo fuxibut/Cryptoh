@@ -5,7 +5,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Blowfish {
-    
+
     public static String decrypt(String strEncrypted, String strKey) throws Exception {
         if (strEncrypted == null || strEncrypted.isEmpty())
             throw new IllegalArgumentException("Cleartext null or empty.");
