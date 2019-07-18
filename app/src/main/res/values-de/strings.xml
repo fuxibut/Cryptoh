@@ -8,4 +8,4 @@
     <string name="error_password">Kein Passwort angegeben oder Passwort zu kurz.</string>
     <string name="error_text">Kein Text angegeben oder in Zwischenablage.</string>
     <string name="message_send">Verschlüsselten Text versenden</string>
-</resources>
+    <string name="explanation">In das obere Textfeld den Text eingeben der verschlüsselt bzw. entschlüsselt werden soll, dann in das untere Feld das zugehörige Passwort eingeben (mindestens 8 Zeichen) und auf den zugehörigen Button tippen.\nIst kein Text im Textfeld, wird auf den Text in der Zwischenablage zugegriffen.\n\nDie App nutzt eine simple aber effektive Implementierung von Blowfish, die weithin als sicher gilt. Aber selbst der beste Verschlüsselungsalgorithmus ist nutzlos wenn das Passwort in die falschen Hände gerät oder nicht regelmäßig gewechselt wird!</string></resources>
