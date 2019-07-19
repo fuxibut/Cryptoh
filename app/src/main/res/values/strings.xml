@@ -15,10 +15,10 @@
     <string name="settings_general">General</string>
     <string name="action_encryption">Action after encryption</string>
     <string-array name="actions_after_encryption">
-        <item>Share text with chooser</item>
-        <item>Share text without chooser</item>
-        <item>Clip text to clipboard</item>
-        <item>No action</item>
+        <item>"Share text with chooser"</item>
+        <item>"Share text without chooser"</item>
+        <item>"Clip text to clipboard"</item>
+        <item>"No action"</item>
     </string-array>
 
 </resources>

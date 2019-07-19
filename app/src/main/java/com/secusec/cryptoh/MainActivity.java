@@ -5,10 +5,13 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.preference.PreferenceManager;
 
 import java.util.Objects;
 
@@ -70,12 +73,32 @@ public class MainActivity extends OptionsMenu {
         if (!encryptedText.isEmpty()) {
             plainEditText.setText(encryptedText);
 
-            // Intent to share text with other apps
+            // Decide what to do after encrypting depending on setting actionAfterEncryption
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            String actionAfterEncryption = sharedPref.getString("actionAfterEncryption", "-1");
             Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
-            sendIntent.setType("text/plain");
-            startActivity(Intent.createChooser(sendIntent, getString(R.string.message_send)));
+
+            String[] choices = getResources().getStringArray(R.array.actions_after_encryption);
+            if (actionAfterEncryption.equals(choices[0])) {
+                // Share with chooser
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getString(R.string.message_send)));
+            } else if (actionAfterEncryption.equals(choices[1])) {
+                // Share without chooser
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            } else if (actionAfterEncryption.equals(choices[2])) {
+                // Copy text to clipboard
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("@string/encryptedText", encryptedText);
+                assert clipboard != null;
+                clipboard.setPrimaryClip(clip);
+            }
+
         }
 
     }

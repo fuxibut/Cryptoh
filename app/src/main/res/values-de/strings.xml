@@ -14,12 +14,13 @@
     <!-- Settings -->
     <string name="title_activity_settings">Einstellungen</string>
     <string name="action_encryption">Aktion nach Verschlüsselung</string>
-    <string-array name="actions_after_encryption">
-        <item>Text teilen mit Chooser</item>
-        <item>Text teilen ohne Chooser</item>
-        <item>Text in Zwischenablage speichern</item>
-        <item>Keine Aktion</item>
-    </string-array>
     <string name="settings_general">Allgemein</string>
+
+    <string-array name="actions_after_encryption">
+        <item>"Text teilen (mit chooser)"</item>
+        <item>"Text teilen (ohne chooser)"</item>
+        <item>"Text zur Zwischenablage hinzufügen"</item>
+        <item>"Keine Aktion"</item>
+    </string-array>
 
 </resources>
