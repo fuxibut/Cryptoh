@@ -4,8 +4,11 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-public class Blowfish {
+class Blowfish {
 
+    /*
+     * Decodes a text with Base64 and decrypts it
+     */
     public static String decrypt(String strEncrypted, String strKey) throws Exception {
         if (strEncrypted == null || strEncrypted.isEmpty())
             throw new IllegalArgumentException("Cleartext null or empty.");
@@ -15,10 +18,12 @@ public class Blowfish {
         SecretKeySpec sKeySpec = new SecretKeySpec(strKey.getBytes(), "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");
         cipher.init(Cipher.DECRYPT_MODE, sKeySpec);
-        String decrypted = new String(cipher.doFinal(decodedBytes));
-        return decrypted;
+        return new String(cipher.doFinal(decodedBytes));
     }
 
+    /*
+     * Encrypts a text and encodes it with Base64
+     */
     public static String encrypt(String strClearText, String strKey) throws Exception {
         if (strClearText == null || strClearText.isEmpty())
             throw new IllegalArgumentException("Cleartext null or empty.");
@@ -28,7 +33,6 @@ public class Blowfish {
         Cipher cipher = Cipher.getInstance("Blowfish");
         cipher.init(Cipher.ENCRYPT_MODE, sKeySpec);
         byte[] encrypted = cipher.doFinal(strClearText.getBytes());
-        String encoded = Base64.getEncoder().encodeToString(encrypted);
-        return encoded;
+        return Base64.getEncoder().encodeToString(encrypted);
     }
 }

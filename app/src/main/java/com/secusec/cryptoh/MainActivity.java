@@ -1,7 +1,5 @@
 package com.secusec.cryptoh;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
@@ -12,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class MainActivity extends OptionsMenu {
 
     @Override
@@ -19,11 +19,12 @@ public class MainActivity extends OptionsMenu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Intent for text being shared with the app
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
         if (Intent.ACTION_SEND.equals(action) && type != null && type.equals("text/plain")) {
-            EditText plainEditText = ((EditText) findViewById(R.id.editText));
+            EditText plainEditText = findViewById(R.id.editText);
             plainEditText.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
         }
     }
@@ -32,35 +33,44 @@ public class MainActivity extends OptionsMenu {
      *  Action performed when the "Encrypt" button is pressed
      */
     public void encrypt(View v) throws Exception {
-        EditText plainEditText = ((EditText) findViewById(R.id.editText));
+        // The text of the textfield
+        EditText plainEditText = findViewById(R.id.editText);
         String plainText = plainEditText.getText().toString();
-        EditText passwordEditText = ((EditText) findViewById(R.id.editTextPassword));
+        // The password
+        EditText passwordEditText = findViewById(R.id.editTextPassword);
         String password = passwordEditText.getText().toString();
+
         String encryptedText = "";
 
-        if (password == null || password.isEmpty() || password.length() < 8) {
+        if (password.isEmpty() || password.length() < 8) {
+            // Empty password
             showToast(getString(R.string.error_password));
             passwordEditText.requestFocus();
         } else {
-            if (plainText == null || plainText.isEmpty()) {
+            if (plainText.isEmpty()) {
+                // Empty textfield
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                if (clipboardManager.hasPrimaryClip() && clipboardManager.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    // Encryption from clipboard
+                assert clipboardManager != null;
+                if (clipboardManager.hasPrimaryClip() && Objects.requireNonNull(clipboardManager.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    // Text in clipboard -> Encryption from clipboard
                     ClipData clipData = clipboardManager.getPrimaryClip();
+                    assert clipData != null;
                     plainText = (String) clipData.getItemAt(0).getText();
                     encryptedText = Blowfish.encrypt(plainText, password);
                 } else {
+                    // No text in textfield or clipboard
                     showToast(getString(R.string.error_text));
                     plainEditText.requestFocus();
                 }
             } else {
-                // Encryption from textfield
+                // Text in textfield -> Encryption from textfield
                 encryptedText = Blowfish.encrypt(plainText, password);
             }
         }
         if (!encryptedText.isEmpty()) {
             plainEditText.setText(encryptedText);
 
+            // Intent to share text with other apps
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
@@ -74,29 +84,37 @@ public class MainActivity extends OptionsMenu {
      *  Action performed when the "Decrypt" key is pressed
      */
     public void decrypt(View v) throws Exception {
-        EditText plainEditText = ((EditText) findViewById(R.id.editText));
+        // The text of the textfield
+        EditText plainEditText = findViewById(R.id.editText);
         String plainText = plainEditText.getText().toString();
-        EditText passwordEditText = ((EditText) findViewById(R.id.editTextPassword));
+        // The password
+        EditText passwordEditText = findViewById(R.id.editTextPassword);
         String password = passwordEditText.getText().toString();
+
         String decryptedText = "";
 
-        if (password == null || password.isEmpty() || password.length() < 8) {
+        if (password.isEmpty() || password.length() < 8) {
+            // Empty password
             showToast(getString(R.string.error_password));
             passwordEditText.requestFocus();
         } else {
-            if (plainText == null || plainText.isEmpty()) {
+            if (plainText.isEmpty()) {
+                // Empty textfield
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                if (clipboardManager.hasPrimaryClip() && clipboardManager.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    // Decryption from clipboard
+                assert clipboardManager != null;
+                if (clipboardManager.hasPrimaryClip() && Objects.requireNonNull(clipboardManager.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    // Text in clipboard -> Decryption from clipboard
                     ClipData clipData = clipboardManager.getPrimaryClip();
+                    assert clipData != null;
                     plainText = (String) clipData.getItemAt(0).getText();
                     decryptedText = Blowfish.decrypt(plainText, password);
                 } else {
+                    // No text in textfield or clipboard
                     showToast(getString(R.string.error_text));
                     plainEditText.requestFocus();
                 }
             } else {
-                // Decryption from textfield
+                // Text in textfield -> Encryption from textfield
                 decryptedText = Blowfish.decrypt(plainText, password);
             }
         }
@@ -106,7 +124,7 @@ public class MainActivity extends OptionsMenu {
     }
 
     /*
-     * Shows a short toast with text
+     * Shows a short toast with given text
      */
     private void showToast(String text) {
         Context context = getApplicationContext();
