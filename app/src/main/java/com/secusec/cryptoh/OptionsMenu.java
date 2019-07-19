@@ -21,4 +21,8 @@ public class OptionsMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onSettingsClick(MenuItem item) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 }
