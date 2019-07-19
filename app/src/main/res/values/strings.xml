@@ -9,5 +9,16 @@
     <string name="message_send">Send encrypted text</string>
     <string name="explanation">Enter your text which should be en- or decrypted in the upper field, then enter the password in the bottom field (min. 8 letters) and touch the appropriate button.\nIf there is no text in the textfield, the clipboard content will be used.\n\nThe app uses a simple but effective implementation of Blowfish. <b>But even the safest encryption algorithm is useless if the password gets in the wrong hands or is not changed frequently!</b></string>
     <string name="about">About</string>
-    <string name="settings">Settings</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="settings_general">General</string>
+    <string name="action_encryption">Action after encryption</string>
+    <string-array name="actions_after_encryption">
+        <item>Share text with chooser</item>
+        <item>Share text without chooser</item>
+        <item>Clip text to clipboard</item>
+        <item>No action</item>
+    </string-array>
+
 </resources>

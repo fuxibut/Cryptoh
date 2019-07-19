@@ -4,6 +4,7 @@
         android:title="@string/about"
         android:onClick="onAboutClick"/>
     <item android:id="@+id/settings"
-        android:title="@string/settings"
+        android:title="@string/title_activity_settings"
         android:onClick="onSettingsClick"/>
+
 </menu>
