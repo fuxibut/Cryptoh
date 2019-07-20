@@ -20,5 +20,11 @@
         <item>"Clip text to clipboard"</item>
         <item>"No action"</item>
     </string-array>
+    <string-array name="actions_encryption_short">
+        <item>"ShareTextWithChooser"</item>
+        <item>"ShareTextWithoutChooser"</item>
+        <item>"ClipTextToClipboard"</item>
+        <item>"NoAction"</item>
+    </string-array>
 
 </resources>
