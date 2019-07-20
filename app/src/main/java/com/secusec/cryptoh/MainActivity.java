@@ -106,7 +106,7 @@ public class MainActivity extends OptionsMenu {
     /*
      *  Action performed when the "Decrypt" key is pressed
      */
-    public void decrypt(View v) throws Exception {
+    public void decrypt(View v) {
         // The text of the textfield
         EditText plainEditText = findViewById(R.id.editText);
         String plainText = plainEditText.getText().toString();
@@ -130,7 +130,12 @@ public class MainActivity extends OptionsMenu {
                     ClipData clipData = clipboardManager.getPrimaryClip();
                     assert clipData != null;
                     plainText = (String) clipData.getItemAt(0).getText();
-                    decryptedText = Blowfish.decrypt(plainText, password);
+                    try {
+                        decryptedText = Blowfish.decrypt(plainText, password);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showToast(getString(R.string.error_blowfish));
+                    }
                 } else {
                     // No text in textfield or clipboard
                     showToast(getString(R.string.error_text));
@@ -138,7 +143,12 @@ public class MainActivity extends OptionsMenu {
                 }
             } else {
                 // Text in textfield -> Encryption from textfield
-                decryptedText = Blowfish.decrypt(plainText, password);
+                try {
+                    decryptedText = Blowfish.decrypt(plainText, password);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showToast(getString(R.string.error_blowfish));
+                }
             }
         }
         if (!decryptedText.isEmpty()) {
