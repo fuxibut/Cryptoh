@@ -21,8 +21,14 @@ public class MainActivity extends OptionsMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        handleIntent();
 
-        // Intent for text being shared with the app
+    }
+
+    /*
+     * Handle Intent for text being shared with the app
+     */
+    public void handleIntent() {
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
@@ -42,9 +48,7 @@ public class MainActivity extends OptionsMenu {
         // The password
         EditText passwordEditText = findViewById(R.id.editTextPassword);
         String password = passwordEditText.getText().toString();
-
         String encryptedText = "";
-
         if (password.isEmpty() || password.length() < 8) {
             // Empty password
             showToast(getString(R.string.error_password));
@@ -72,13 +76,12 @@ public class MainActivity extends OptionsMenu {
         }
         if (!encryptedText.isEmpty()) {
             plainEditText.setText(encryptedText);
-
-            // Decide what to do after encrypting depending on setting actionAfterEncryption
+            // Retrieve setting actionAfterEncryption
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             String actionAfterEncryption = sharedPref.getString("actionAfterEncryption", "-1");
             Intent sendIntent = new Intent();
-
             String[] choices = getResources().getStringArray(R.array.actions_after_encryption);
+            // Decide what to do after encrypting depending on setting actionAfterEncryption
             if (actionAfterEncryption.equals(choices[0])) {
                 // Share with chooser
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -98,9 +101,7 @@ public class MainActivity extends OptionsMenu {
                 assert clipboard != null;
                 clipboard.setPrimaryClip(clip);
             }
-
         }
-
     }
 
     /*
@@ -113,9 +114,7 @@ public class MainActivity extends OptionsMenu {
         // The password
         EditText passwordEditText = findViewById(R.id.editTextPassword);
         String password = passwordEditText.getText().toString();
-
         String decryptedText = "";
-
         if (password.isEmpty() || password.length() < 8) {
             // Empty password
             showToast(getString(R.string.error_password));
