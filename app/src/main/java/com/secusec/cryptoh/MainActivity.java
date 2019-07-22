@@ -28,7 +28,7 @@ public class MainActivity extends OptionsMenu {
     /*
      * Handle Intent for text being shared with the app
      */
-    public void handleIntent() {
+    private void handleIntent() {
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
