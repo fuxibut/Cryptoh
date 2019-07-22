@@ -14,11 +14,17 @@
     <string name="title_activity_settings">Settings</string>
     <string name="settings_general">General</string>
     <string name="action_encryption">Action after encryption</string>
+    <string name="error_blowfish">Decrypting crashed - bad password?</string>
     <string-array name="actions_after_encryption">
         <item>"Share text with chooser"</item>
         <item>"Share text without chooser"</item>
         <item>"Clip text to clipboard"</item>
         <item>"No action"</item>
     </string-array>
-
+    <string-array name="actions_encryption_short">
+        <item>"ShareTextWithChooser"</item>
+        <item>"ShareTextWithoutChooser"</item>
+        <item>"ClipTextToClipboard"</item>
+        <item>"NoAction"</item>
+    </string-array>
 </resources>

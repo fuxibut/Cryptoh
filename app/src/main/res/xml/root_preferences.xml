@@ -17,12 +17,12 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO Add default value for the action after encryption -->
     <PreferenceCategory app:title="@string/settings_general">
         <ListPreference
             android:summary="%s"
             android:entries="@array/actions_after_encryption"
-            android:entryValues="@array/actions_after_encryption"
+            android:entryValues="@array/actions_encryption_short"
+            android:defaultValue="ShareTextWithChooser"
             android:key="actionAfterEncryption"
             android:title="@string/action_encryption"/>
     </PreferenceCategory>
