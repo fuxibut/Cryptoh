@@ -21,6 +21,7 @@ public class MainActivity extends OptionsMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         handleIntent();
 
     }
@@ -100,6 +101,8 @@ public class MainActivity extends OptionsMenu {
                 ClipData clip = ClipData.newPlainText("@string/encryptedText", encryptedText);
                 assert clipboard != null;
                 clipboard.setPrimaryClip(clip);
+            } else {
+                System.out.println(actionAfterEncryption);
             }
         }
     }
