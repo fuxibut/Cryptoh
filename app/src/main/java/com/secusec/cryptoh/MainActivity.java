@@ -74,27 +74,27 @@ public class MainActivity extends OptionsMenu {
                 encryptedText = Blowfish.encrypt(plainText, password);
             }
         }
+        // TODO: Add array instead of constants for actions
         if (!encryptedText.isEmpty()) {
             plainEditText.setText(encryptedText);
             // Retrieve setting actionAfterEncryption
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             String actionAfterEncryption = sharedPref.getString("actionAfterEncryption", "-1");
             Intent sendIntent = new Intent();
-            String[] choices = getResources().getStringArray(R.array.actions_after_encryption);
             // Decide what to do after encrypting depending on setting actionAfterEncryption
-            if (actionAfterEncryption.equals(choices[0])) {
+            if (actionAfterEncryption.equals("ShareTextWithChooser")) {
                 // Share with chooser
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getString(R.string.message_send)));
-            } else if (actionAfterEncryption.equals(choices[1])) {
+            } else if (actionAfterEncryption.equals("ShareTextWithoutChooser")) {
                 // Share without chooser
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, encryptedText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
-            } else if (actionAfterEncryption.equals(choices[2])) {
+            } else if (actionAfterEncryption.equals("ClipTextToClipboard")) {
                 // Copy text to clipboard
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("@string/encryptedText", encryptedText);
