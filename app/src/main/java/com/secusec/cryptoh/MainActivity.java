@@ -21,6 +21,7 @@ public class MainActivity extends OptionsMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         handleIntent();
 
     }
