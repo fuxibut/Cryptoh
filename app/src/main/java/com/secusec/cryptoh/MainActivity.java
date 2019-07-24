@@ -100,6 +100,8 @@ public class MainActivity extends OptionsMenu {
                 ClipData clip = ClipData.newPlainText("@string/encryptedText", encryptedText);
                 assert clipboard != null;
                 clipboard.setPrimaryClip(clip);
+            } else {
+                System.out.println(actionAfterEncryption);
             }
         }
     }
